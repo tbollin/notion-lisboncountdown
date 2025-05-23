@@ -146,6 +146,13 @@
             letter-spacing: 1px;
         }
 
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            h1 {
+                color: #e0e0e0;
+            }
+        }
+
         .countdown {
             display: flex;
             justify-content: center;
@@ -180,6 +187,15 @@
             transform-style: preserve-3d;
         }
 
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            .time-value {
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+                box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            }
+        }
+
         .time-value .digit {
             display: inline-block;
             transition: transform 0.6s ease;
@@ -211,6 +227,13 @@
             opacity: 0.8;
         }
 
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            .time-label {
+                color: #b0b0b0;
+            }
+        }
+
         .ago-indicator {
             background: #ff6b6b;
             color: white;
@@ -238,6 +261,13 @@
             font-size: 1.2rem;
             margin-top: 20px;
             opacity: 0.9;
+        }
+
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            .destination {
+                color: #c0c0c0;
+            }
         }
 
         @media (max-width: 600px) {
