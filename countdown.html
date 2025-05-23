@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Kuala Lumpur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bg-element:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-element:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            background: #4ecdc4;
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .bg-element:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            background: #45b7d1;
+            top: 30%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .bg-element:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            background: #96ceb4;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 3s;
+        }
+
+        .bg-element:nth-child(5) {
+            width: 22px;
+            height: 22px;
+            background: #feca57;
+            top: 10%;
+            right: 30%;
+            animation-delay: 4s;
+        }
+
+        .bg-element:nth-child(6) {
+            width: 16px;
+            height: 16px;
+            background: #ff9ff3;
+            top: 70%;
+            left: 60%;
+            animation-delay: 1.5s;
+        }
+
+        .bg-element:nth-child(7) {
+            width: 19px;
+            height: 19px;
+            background: #54a0ff;
+            top: 40%;
+            left: 5%;
+            animation-delay: 2.5s;
+        }
+
+        .bg-element:nth-child(8) {
+            width: 24px;
+            height: 24px;
+            background: #5f27cd;
+            bottom: 30%;
+            right: 10%;
+            animation-delay: 3.5s;
+        }
+
+        .bg-element:nth-child(9) {
+            width: 17px;
+            height: 17px;
+            background: #00d2d3;
+            top: 15%;
+            left: 40%;
+            animation-delay: 0.5s;
+        }
+
+        .bg-element:nth-child(10) {
+            width: 21px;
+            height: 21px;
+            background: #ff6348;
+            bottom: 40%;
+            left: 70%;
+            animation-delay: 4.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .countdown-container {
+            text-align: center;
+            background: transparent;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .time-value {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            padding: 15px 10px;
+            border-radius: 12px;
+            min-width: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .time-value .digit {
+            display: inline-block;
+            transition: transform 0.6s ease;
+        }
+
+        .time-value .digit.flip {
+            animation: flipAnimation 0.6s ease-in-out;
+        }
+
+        @keyframes flipAnimation {
+            0% {
+                transform: rotateX(0deg);
+            }
+            50% {
+                transform: rotateX(-90deg);
+            }
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+        .time-label {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .ago-indicator {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        .destination {
+            color: #555;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .time-value {
+                font-size: 2rem;
+                padding: 10px 8px;
+                min-width: 60px;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background elements -->
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+
+    <div class="countdown-container">
+        <h1>Countdown to Lisbon!</h1>
+        
+        <div class="countdown">
+            <div class="time-unit">
+                <div class="time-value" id="years">00</div>
+                <div class="time-label">Years</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="months">00</div>
+                <div class="time-label">Months</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="weeks">00</div>
+                <div class="time-label">Weeks</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="days">00</div>
+                <div class="time-label">Days</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="hours">00</div>
+                <div class="time-label">Hours</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="minutes">00</div>
+                <div class="time-label">Minutes</div>
+            </div>
+            
+            <div class="time-unit">
+                <div class="time-value" id="seconds">00</div>
+                <div class="time-label">Seconds</div>
+            </div>
+            
+            <div class="ago-indicator" id="agoIndicator" style="display: none;">ago</div>
+        </div>
+        
+        <div class="destination">🇵🇹 The Next Phi Labs Team Adventure Awaits!</div>
+    </div>
+
+    <script>
+        // Set your target date here (YYYY, MM-1, DD, HH, MM, SS)
+        // Note: Month is 0-indexed (0 = January, 11 = December)
+        const targetDate = new Date(2025, 5, 3, 9, 0, 0); // June 3, 2025, 9:00 AM
+        
+        const elements = {
+            years: document.getElementById('years'),
+            months: document.getElementById('months'),
+            weeks: document.getElementById('weeks'),
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds'),
+            agoIndicator: document.getElementById('agoIndicator')
+        };
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = targetDate - now;
+            
+            if (timeDifference <= 0) {
+                // Show "ago" indicator
+                elements.agoIndicator.style.display = 'block';
+                
+                // Calculate time since the event
+                const absoluteDifference = Math.abs(timeDifference);
+                
+                const years = Math.floor(absoluteDifference / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((absoluteDifference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+                const weeks = Math.floor((absoluteDifference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
+                const days = Math.floor((absoluteDifference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((absoluteDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((absoluteDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((absoluteDifference % (1000 * 60)) / 1000);
+
+                updateElement('years', years);
+                updateElement('months', months);
+                updateElement('weeks', weeks);
+                updateElement('days', days);
+                updateElement('hours', hours);
+                updateElement('minutes', minutes);
+                updateElement('seconds', seconds);
+            } else {
+                // Hide "ago" indicator
+                elements.agoIndicator.style.display = 'none';
+                
+                // Calculate time remaining
+                const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+                const weeks = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
+                const days = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                updateElement('years', years);
+                updateElement('months', months);
+                updateElement('weeks', weeks);
+                updateElement('days', days);
+                updateElement('hours', hours);
+                updateElement('minutes', minutes);
+                updateElement('seconds', seconds);
+            }
+        }
+
+        function updateElement(id, value) {
+            const element = elements[id];
+            const formattedValue = value.toString().padStart(2, '0');
+            
+            if (element.textContent !== formattedValue) {
+                // Create flip animation for each digit
+                const digits = element.querySelectorAll('.digit');
+                if (digits.length === 0) {
+                    // First time setup - wrap each character in a span
+                    element.innerHTML = formattedValue.split('').map(char => 
+                        `<span class="digit">${char}</span>`
+                    ).join('');
+                } else {
+                    // Update existing digits with flip animation
+                    const newDigits = formattedValue.split('');
+                    digits.forEach((digit, index) => {
+                        if (digit.textContent !== newDigits[index]) {
+                            digit.classList.add('flip');
+                            setTimeout(() => {
+                                digit.textContent = newDigits[index];
+                            }, 300);
+                            setTimeout(() => {
+                                digit.classList.remove('flip');
+                            }, 600);
+                        }
+                    });
+                }
+            }
+        }
+
+        // Update immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
